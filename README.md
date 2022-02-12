@@ -13,10 +13,12 @@ Ejemplo de json a enviar:
 - Para el parámetro de clave_entidad de enviá la clave de la entidad federativa qie abarcan del 01 al 31, si es enviado vació toma todas la entidades
 - El parámetro page recibe el numero de pagina par listar lo resultados los cuales de muestran en bloques de 100 resultados
 
+```json
 {
     "buscar":["parámetro1","parámetro1","parámetro3","..."],
     "clave_entidad":"20"
 }
+```
 
 Librerías utilizadas
 - api DENUE INEGI
