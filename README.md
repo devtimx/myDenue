@@ -16,7 +16,8 @@ Ejemplo de json a enviar:
 ```json
 {
     "buscar":["parámetro1","parámetro1","parámetro3","..."],
-    "clave_entidad":"20"
+    "clave_entidad":"20",
+    "page":"1"
 }
 ```
 
