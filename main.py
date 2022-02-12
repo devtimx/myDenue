@@ -15,16 +15,24 @@ def test():
 
 
 # get data inegi
-@app.route('/consulta', methods=['GET', 'POST'])
+@app.route('/consulta', methods=['GET'])
 def request_inegi():
     data = request.get_json(force=True)
     buscar = data['buscar']
     clave_entidad = data['clave_entidad']
+    page = int(data['page'])
+    rows_page=100;
+    startpage=(page - 1)*rows_page;
+    endpage=page*rows_page;
+    #print("startpage: ",startpage)
+    #print("endpage: ",endpage)
     if not clave_entidad:
-        url = 'https://www.inegi.org.mx/app/api/denue/v1/consulta/buscarEntidad/todos/00/1/5000/9bdd2363-e5d9-b954-fd47-0372c0e5e05e'
+        url = 'https://www.inegi.org.mx/app/api/denue/v1/consulta/buscarEntidad/todos/00/{}/{}/9bdd2363-e5d9-b954-fd47-0372c0e5e05e'.format(startpage,endpage)
+        #print(url)
     else:
-        url = 'https://www.inegi.org.mx/app/api/denue/v1/consulta/buscarEntidad/todos/{}/1/5000/9bdd2363-e5d9-b954-fd47-0372c0e5e05e'.format(
-            clave_entidad)
+        url = 'https://www.inegi.org.mx/app/api/denue/v1/consulta/buscarEntidad/todos/{}/{}/{}/9bdd2363-e5d9-b954-fd47-0372c0e5e05e'.format(
+            clave_entidad,startpage,endpage)
+        #print(url)
     respuesta = requests.get(url).json()
     df = pd.DataFrame(respuesta)
     df.columns = df.columns.str.lower()
@@ -35,7 +43,7 @@ def request_inegi():
 
     for busca in buscar:
         buscar = busca.upper()
-        print(buscar)
+        #print(buscar)
         df = df.append(df[df.ubicacion.str.contains(buscar)],
                        ignore_index=True)
     return df.to_json(orient='index')

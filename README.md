@@ -9,8 +9,9 @@ Crear un servicio que proporcione la informacion de los negocios por localidades
 
 Ejemplo de json a enviar:
 
-- Para el parámetro buscar se enviá un arreglo con los parámetros de búsqueda, puede 
+- Para el parámetro buscar se enviá un arreglo con los parámetros de búsqueda, mediante un arreglo
 - Para el parámetro de clave_entidad de enviá la clave de la entidad federativa qie abarcan del 01 al 31, si es enviado vació toma todas la entidades
+- El parámetro page recibe el numero de pagina par listar lo resultados los cuales de muestran en bloques de 100 resultados
 
 {
     "buscar":["parámetro1","parámetro1","parámetro3","..."],
